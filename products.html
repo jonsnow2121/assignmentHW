@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Page Title -->
+    <title>Products</title>
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+   <div class="container">
+    <section>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#viewProductDiv">View All Products</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#newPrductDiv">Add New Product</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#cartDiv">Cart</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane container active" id="viewProductDiv"></div>
+  <div class="tab-pane container fade" id="newPrductDiv"></div>
+  <div class="tab-pane container fade" id="cartDiv">Items Added in Cart :<span id="cartCount">0</div>
+</div>
+				</div>
+			</div>
+	</section>
+	<div>
+	
+	 <textarea id="vPTemplate" style="display:none;">
+	 <span class="d-none">{index = 0}</span>
+	  
+	  
+	  <div class="innerSection1">
+	  {#if $T.isFilter ==undefined}
+	        <select id="catSel" class="dayStatus form-control">
+			<option value="0" selected>Filter By Category</option>
+		{#foreach $T.prodCat as oneProduct}
+			<option value="{$T.oneProduct}">{$T.oneProduct}</option>
+		{#/for}
+      </select>
+	   {#/if}
+	  {#if $T.isFilter !=undefined}
+	  <div><a class="customLink1 text-white clearfilter mt-3">Clear filter</a></div>
+	  {#/if}
+				 <table class="table">
+				 <caption>Products Data</caption>
+		  <thead class="thead-dark">
+			<tr>
+			  <th scope="col">#</th>
+			  <th scope="col">Product Category</th>
+			  <th scope="col">Product Name</th>
+			  <th scope="col">Price</th>
+			  <th scope="col">Action</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		  {#foreach $T.productData as oneProduct}
+		  <span class="d-none">{++index}</span>
+			<tr>
+			  <th scope="row">{index}</th>
+			  <td>{$T.oneProduct.itemCat}</td>
+			  <td>{$T.oneProduct.name}</td>
+			  <td>Rs {$T.oneProduct.price}</td>
+			  <td><a prodId="{$T.oneProduct.prodId}" class="customLink1 text-white addToCart">Add To Cart</a></td>
+			</tr>
+			{#/for}
+		  </tbody>
+		</table>
+		</div>
+		
+   </textarea>
+	
+</body>
+
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-jtemplates.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/product.js"></script>
+</html>
